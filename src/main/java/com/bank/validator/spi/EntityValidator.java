@@ -1,4 +1,4 @@
-package com.bank.policy.data.validator.spi;
+package com.bank.validator.spi;
 
 public interface EntityValidator<DomainEntity> {
     public boolean isValid(DomainEntity domainEntity);

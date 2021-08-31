@@ -11,7 +11,7 @@ import java.util.List;
 public class BasicConnectionPool implements ConnectionPool {
 
     private static final int INITIAL_POOL_SIZE = 10;
-    private static final int MAX_POOL_SIZE = 100;
+    private static final int MAX_POOL_SIZE = 500;
     private static final int MAX_TIMEOUT = 300;
 
     private final String url;
@@ -49,8 +49,7 @@ public class BasicConnectionPool implements ConnectionPool {
             if (usedConnections.size() < MAX_POOL_SIZE) {
                 connectionPool.add(createConnection(url, user, password));
             } else {
-                throw new RuntimeException(
-                        "Maximum pool size reached, no available connections!");
+                throw new SQLException("Maximum pool size reached, no available connections!");
             }
         }
 
@@ -82,6 +81,18 @@ public class BasicConnectionPool implements ConnectionPool {
         connectionPool.clear();
     }
 
+    public static int getMaxPoolSize(){
+        return MAX_POOL_SIZE;
+    }
+
+    public static int getInitialPoolSize(){
+        return INITIAL_POOL_SIZE;
+    }
+
+    public static  int getMaxTimeout(){
+        return  MAX_TIMEOUT;
+    }
+
     public int getSize() {
         return connectionPool.size() + usedConnections.size();
     }
@@ -100,5 +111,6 @@ public class BasicConnectionPool implements ConnectionPool {
     public String getPassword() {
         return password;
     }
+
 
 }

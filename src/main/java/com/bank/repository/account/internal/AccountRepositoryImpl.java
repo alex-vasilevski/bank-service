@@ -4,9 +4,8 @@ import com.bank.domain.db.AccountEntity;
 import com.bank.infrastructure.connection.pool.spi.ConnectionPool;
 import com.bank.infrastructure.generator.id.spi.IdGenerator;
 import com.bank.infrastructure.generator.sql.spi.SqlGenerator;
-import com.bank.policy.data.validator.internal.AccountEntityValidator;
+import com.bank.validator.internal.AccountEntityValidator;
 import com.bank.repository.account.spi.AccountRepository;
-import com.bank.repository.exceptions.internal.CannotReadAccountWithNullableIdException;
 import org.apache.log4j.Logger;
 
 
