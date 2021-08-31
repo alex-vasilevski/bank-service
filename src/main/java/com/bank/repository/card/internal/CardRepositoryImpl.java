@@ -1,8 +1,13 @@
 package com.bank.repository.card.internal;
 
 import com.bank.domain.db.CardEntity;
+import com.bank.infrastructure.configuration.spi.ApplicationConfiguration;
+import com.bank.infrastructure.connection.pool.internal.BasicConnectionPool;
 import com.bank.infrastructure.connection.pool.spi.ConnectionPool;
+import com.bank.infrastructure.factory.entity.internal.EntityFactoryImpl;
 import com.bank.infrastructure.factory.entity.spi.EntityFactory;
+import com.bank.infrastructure.factory.generator.sql.internal.SelectByParamsSqlGenerator;
+import com.bank.infrastructure.factory.statement.internal.PreparedStatementFactoryImpl;
 import com.bank.infrastructure.factory.statement.spi.PreparedStatementFactory;
 import com.bank.infrastructure.factory.generator.sql.spi.SqlGenerator;
 import com.bank.repository.account.internal.AccountRepositoryImpl;
@@ -32,14 +37,12 @@ public class CardRepositoryImpl implements CardRepository {
     private final String tableName;
     private final Map<String, Field> fieldMapping;
 
-    public CardRepositoryImpl(EntityFactory entityFactory, PreparedStatementFactory preparedStatementFactory,
-                              CardEntityValidator validator, SqlGenerator<CardEntity> selectCardEntityByParamsSqlGenerator,
-                              ConnectionPool connectionPool, String tableName, Map<String, Field> fieldMapping) {
-        this.entityFactory = entityFactory;
-        this.preparedStatementFactory = preparedStatementFactory;
-        this.validator = validator;
-        this.selectCardEntityByParamsSqlGenerator = selectCardEntityByParamsSqlGenerator;
-        this.connectionPool = connectionPool;
+    public CardRepositoryImpl(String tableName, Map<String, Field> fieldMapping, ApplicationConfiguration configuration) {
+        this.entityFactory = new EntityFactoryImpl();
+        this.preparedStatementFactory = new PreparedStatementFactoryImpl();
+        this.validator = new CardEntityValidator();
+        this.selectCardEntityByParamsSqlGenerator = new SelectByParamsSqlGenerator<>();
+        this.connectionPool = BasicConnectionPool.create(configuration.getDBurl(), configuration.getDBUserName(), configuration.getDBPassword());
         this.tableName = tableName;
         this.fieldMapping = fieldMapping;
     }
