@@ -1,12 +1,8 @@
-package com.bank.infrastructure.generator.sql.internal;
+package com.bank.infrastructure.factory.generator.sql.internal;
 
-import com.bank.domain.db.AccountEntity;
-import com.bank.infrastructure.generator.sql.spi.SqlGenerator;
+import com.bank.infrastructure.factory.generator.sql.spi.SqlGenerator;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 public class SelectByParamsSqlGenerator<Entity> implements SqlGenerator<Entity> {

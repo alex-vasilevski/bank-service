@@ -1,6 +1,4 @@
-package com.bank.infrastructure.generator.sql.spi;
-
-import com.bank.domain.db.AccountEntity;
+package com.bank.infrastructure.factory.generator.sql.spi;
 
 import java.lang.reflect.Field;
 import java.util.Map;

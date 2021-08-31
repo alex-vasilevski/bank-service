@@ -1,18 +1,19 @@
 package com.bank.domain.db;
 
-import com.bank.domain.db.operators.internal.Client;
-
 import java.util.Objects;
 
 public class CardEntity {
     private Integer id;
-    private Client owner;
-    private AccountEntity accountEntity;
+    private Integer ownerId;
+    private Integer accountId;
 
-    public CardEntity(Integer id, Client owner, AccountEntity accountEntity) {
+    public CardEntity(Integer id, Integer ownerId, Integer accountId) {
         this.id = id;
-        this.owner = owner;
-        this.accountEntity = accountEntity;
+        this.ownerId = ownerId;
+        this.accountId = accountId;
+    }
+
+    public CardEntity() {
     }
 
     public Integer getId() {
@@ -23,32 +24,32 @@ public class CardEntity {
         this.id = id;
     }
 
-    public Client getOwner() {
-        return owner;
+    public Integer getOwnerId() {
+        return ownerId;
     }
 
-    public void setOwner(Client owner) {
-        this.owner = owner;
+    public void setOwnerId(Integer ownerId) {
+        this.ownerId = ownerId;
     }
 
-    public AccountEntity getAccount() {
-        return accountEntity;
+    public Integer getAccountId() {
+        return accountId;
     }
 
-    public void setAccount(AccountEntity accountEntity) {
-        this.accountEntity = accountEntity;
+    public void setAccountId(Integer accountId) {
+        this.accountId = accountId;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        CardEntity cardEntity = (CardEntity) o;
-        return Objects.equals(id, cardEntity.id) && Objects.equals(owner, cardEntity.owner) && Objects.equals(accountEntity, cardEntity.accountEntity);
+        CardEntity that = (CardEntity) o;
+        return Objects.equals(id, that.id) && Objects.equals(ownerId, that.ownerId) && Objects.equals(accountId, that.accountId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, owner, accountEntity);
+        return Objects.hash(id, ownerId, accountId);
     }
 }
